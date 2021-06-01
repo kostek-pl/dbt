@@ -112,10 +112,10 @@ class PostgresAdapter(SQLAdapter):
                 self.cache.add_link(referenced, dependent)
 
     def _get_catalog_schemas(self, manifest):
-        # postgres/redshift(not ra3) only allow one database (the main one)
+        # postgres only allow one database (the main one)
         schemas = super()._get_catalog_schemas(manifest)
         try:
-            return schemas.flatten(allow_duplicates=self.config.credentials.ra3_node)
+            return schemas.flatten()
         except dbt.exceptions.RuntimeException as exc:
             dbt.exceptions.raise_compiler_error(
                 'Cross-db references not allowed in adapter {}: Got {}'.format(
