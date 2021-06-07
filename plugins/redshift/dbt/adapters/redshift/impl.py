@@ -83,7 +83,6 @@ class RedshiftAdapter(PostgresAdapter, SQLAdapter):
             return schemas.flatten(allow_multiple_databases=self.config.credentials.ra3_node)
         except dbt.exceptions.RuntimeException as exc:
             dbt.exceptions.raise_compiler_error(
-                'Cross-db references not allowed in adapter {}: Got {}'.format(
-                    self.type(), exc.msg
-                )
+                'Cross-db references allowed only in {} RA3.* node. Got {}'
+                .format(self.type(), exc.msg)
             )
