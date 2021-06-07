@@ -433,7 +433,7 @@ class SchemaSearchMap(Dict[InformationSchema, Set[Optional[str]]]):
             for schema in schemas:
                 yield information_schema_name, schema
 
-    def flatten(self, allow_multiple_databases: bool=False):
+    def flatten(self, allow_multiple_databases: bool = False):
         new = self.__class__()
 
         # make sure we don't have multiple databases if allow_multiple_databases is set to False

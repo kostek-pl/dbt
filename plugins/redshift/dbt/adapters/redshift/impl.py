@@ -67,11 +67,11 @@ class RedshiftAdapter(PostgresAdapter, SQLAdapter):
             database = database.strip('"')
         expected = self.config.credentials.database
         ra3_node = self.config.credentials.ra3_node
-    
+
         if database.lower() != expected.lower() and not ra3_node:
             raise dbt.exceptions.NotImplementedException(
-               'Cross-db references allowed only in RA3.* node. ({} vs {})'
-               .format(database, expected)
+                'Cross-db references allowed only in RA3.* node. ({} vs {})'
+                .format(database, expected)
             )
         # return an empty string on success so macros can call this
         return ''
@@ -86,4 +86,4 @@ class RedshiftAdapter(PostgresAdapter, SQLAdapter):
                 'Cross-db references not allowed in adapter {}: Got {}'.format(
                     self.type(), exc.msg
                 )
-            )        
+            )
